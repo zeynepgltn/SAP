@@ -1,0 +1,33 @@
+FUNCTION zbk_fm_matnr_check.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(IT_MATNR) TYPE  ZBK_T_MATNR_LIST
+*"  EXPORTING
+*"     VALUE(ET_CHECKED) TYPE  ZBK_T_MATNR_CHECKED_LIST
+*"----------------------------------------------------------------------
+
+  DATA: lt_mara    TYPE TABLE OF mara,
+        ls_mara    TYPE mara,
+        ls_matnr   TYPE zbk_s_matnr_list,
+        ls_checked TYPE zbk_s_matnr_checked_list.
+
+  IF it_matnr IS NOT INITIAL.
+    SELECT * FROM mara
+      INTO TABLE lt_mara
+      FOR ALL ENTRIES IN it_matnr
+      WHERE matnr EQ it_matnr-matnr.
+
+    LOOP AT it_matnr INTO ls_matnr.
+      ls_checked-matnr = ls_matnr-matnr.
+      READ TABLE lt_mara INTO ls_mara WITH KEY matnr = ls_matnr-matnr.
+      IF sy-subrc EQ 0.
+        ls_checked-checked = 'VAR'.
+      ELSE.
+        ls_checked-checked = 'YOK'.
+      ENDIF.
+      APPEND ls_checked TO et_checked.
+    ENDLOOP.
+  ENDIF.
+
+ENDFUNCTION.
