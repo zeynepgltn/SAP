@@ -1,0 +1,28 @@
+REPORT z_class.
+
+DATA: go_class TYPE REF TO z_class.
+DATA: gv_num1   TYPE int4,
+      gv_num2   TYPE int4,
+      gv_result TYPE int4.
+
+" De#i#kenleri ba#lang#çta tan#mla
+gv_num1 = 23.
+gv_num2 = 34.
+
+START-OF-SELECTION.
+  " Nesne olu#tur
+  CREATE OBJECT go_class.
+
+  " Method ça##r
+  go_class->sum_numbers(
+    EXPORTING
+      iv_num1   = gv_num1
+      iv_num2   = gv_num2
+    IMPORTING
+      ev_result = gv_result
+  ).
+
+  z_class=>sum_numbers_v2( ).
+
+  " Sonucu yazd#r
+  WRITE: / 'Toplam:', gv_result.

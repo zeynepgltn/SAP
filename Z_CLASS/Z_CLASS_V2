@@ -1,0 +1,3 @@
+  method DIFF_NUMBERS.
+    EV_RESULT = IV_NUM1 - IV_NUM2.
+  endmethod.

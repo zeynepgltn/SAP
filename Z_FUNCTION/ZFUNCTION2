@@ -1,0 +1,19 @@
+REPORT z_veri_tipi_kontrolu.
+
+PARAMETERS: p_val TYPE char20.
+
+DATA: gv_htype LIKE dd01v-datatype.
+
+START-OF-SELECTION.
+
+  CALL FUNCTION 'NUMERIC_CHECK'
+    EXPORTING
+      string_in = p_val
+    IMPORTING
+      htype     = gv_htype.
+
+  IF gv_htype EQ 'CHAR'.
+    WRITE: 'Say#sal olmayan bir de#er girdiniz!'.
+  ELSEIF gv_htype EQ 'NUMC'.
+    WRITE: 'Say#sal bir de#er girdiniz!'.
+  ENDIF.
