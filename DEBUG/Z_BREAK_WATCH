@@ -1,0 +1,50 @@
+REPORT z_break_watch.
+
+DATA: gv_ind   TYPE i,
+      gv_total TYPE i.
+
+START-OF-SELECTION.
+  gv_ind = 0.
+
+  DO 1000 TIMES.
+    gv_ind += 1.
+    gv_total += gv_ind.
+  ENDDO.
+
+  WRITE: / gv_total.
+
+
+
+*DATA: gv_num1   TYPE i,
+*      gv_num2   TYPE i,
+*      gv_result TYPE i.
+*
+*START-OF-SELECTION.
+*
+*  PERFORM form1.
+*  PERFORM form2.
+*  PERFORM form3.
+*
+*
+*FORM form1.
+*  gv_num1 = 100.
+*  gv_num2 = 20.
+*ENDFORM.
+*
+*
+*FORM form2.
+*
+*  CALL FUNCTION 'Z_DIVIDE'
+* EXPORTING
+*   IV_NUM1        = 0
+*   IV_NUM2        = 2
+* IMPORTING
+*   EV_SONUC       =
+*    .
+*ENDFORM.
+*
+*FORM form3.
+*  MESSAGE s000(z_message).
+*  MESSAGE s001(z_message).
+*  MESSAGE s002(z_message).
+*ENDFORM.
